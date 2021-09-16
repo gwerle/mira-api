@@ -51,7 +51,7 @@ class Producer {
       'NAO_INFORMADO',
     ],
   })
-  type: ProductionSystem;
+  production_system: ProductionSystem;
 
   @Column()
   egg_type: string;
@@ -63,7 +63,7 @@ class Producer {
   animals_quantity: string;
 
   @Column()
-  permission_to_send_info: string;
+  permission_to_send_info: boolean;
 
   @Column()
   email: string;
