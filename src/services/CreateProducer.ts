@@ -12,13 +12,16 @@ interface Request {
   state: string;
   socialMedia: string;
   supplyArea: string;
-  productionSystem: ProductionSystem;
+  productionSystemEnum: ProductionSystem;
+  productionSystem: string;
   eggType: string;
   avgEggProduction: string;
   animalsQuantity: string;
   permissionToSendInfo: boolean;
   email: string;
   moreInformation: string;
+  lat: number;
+  long: number;
 }
 
 class CreateProducer {
@@ -33,33 +36,43 @@ class CreateProducer {
     socialMedia,
     supplyArea,
     productionSystem,
+    productionSystemEnum,
     eggType,
     avgEggProduction,
     animalsQuantity,
     permissionToSendInfo,
     email,
     moreInformation,
+    lat,
+    long,
   }: Request): Promise<Producer> {
     const producerRepository = getRepository(Producer);
 
-    const producer = producerRepository.create({
-      farm_name: farmName,
-      address,
-      district,
-      city,
-      cep,
-      phone_number: phoneNumber,
-      state,
-      social_media: socialMedia,
-      supply_area: supplyArea,
-      production_system: productionSystem,
-      egg_type: eggType,
-      avg_egg_production: avgEggProduction,
-      animals_quantity: animalsQuantity,
-      email,
-      permission_to_send_info: permissionToSendInfo,
-      more_information: moreInformation,
-    });
+    const producer = await producerRepository.query(
+      'INSERT INTO producers (farm_name, address, district, city, cep, phone_number, state, social_media, supply_area, production_system_enum, production_system, egg_type, avg_egg_production, animals_quantity, email, permission_to_send_info, more_information, geom)' +
+        'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, ST_SetSRID(ST_MakePoint($18, $19), 4326))',
+      [
+        farmName,
+        address,
+        district,
+        city,
+        cep,
+        phoneNumber,
+        state,
+        socialMedia,
+        supplyArea,
+        productionSystemEnum,
+        productionSystem,
+        eggType,
+        avgEggProduction,
+        animalsQuantity,
+        email,
+        permissionToSendInfo,
+        moreInformation,
+        long,
+        lat,
+      ],
+    );
 
     await producerRepository.save(producer);
 

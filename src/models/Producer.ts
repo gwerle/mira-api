@@ -40,7 +40,7 @@ class Producer {
   supply_area: string;
 
   @Column({
-    name: 'production_system',
+    name: 'production_system_enum',
     type: 'enum',
     enum: [
       'CAIPIRA',
@@ -49,9 +49,14 @@ class Producer {
       'LIVRE_GAIOLA',
       'ORGANICO',
       'NAO_INFORMADO',
+      '2_SISTEMAS_PRODUCAO',
+      '3_SISTEMAS_PRODUCAO',
     ],
   })
-  production_system: ProductionSystem;
+  production_system_enum: ProductionSystem;
+
+  @Column()
+  production_system: string;
 
   @Column()
   egg_type: string;
@@ -70,6 +75,9 @@ class Producer {
 
   @Column()
   more_information: string;
+
+  @Column()
+  geom: string;
 
   @CreateDateColumn()
   created_at: Date;

@@ -4,7 +4,7 @@ export = {
   port: 5432,
   username: 'docker',
   password: 'docker',
-  database: 'postgres',
+  database: 'mira_api',
   entities: ['./src/models/*.ts'],
   migrations: ['./src/database/migrations/*.ts'],
   cli: {

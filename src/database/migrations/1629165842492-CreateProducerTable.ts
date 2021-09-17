@@ -61,7 +61,7 @@ export default class CreateProducerTable1629165842492
             isNullable: true,
           },
           {
-            name: 'production_system',
+            name: 'production_system_enum',
             type: 'enum',
             enum: [
               'CAIPIRA',
@@ -70,7 +70,14 @@ export default class CreateProducerTable1629165842492
               'LIVRE_GAIOLA',
               'ORGANICO',
               'NAO_INFORMADO',
+              '2_SISTEMAS_PRODUCAO',
+              '3_SISTEMAS_PRODUCAO',
             ],
+            isNullable: false,
+          },
+          {
+            name: 'production_system',
+            type: 'varchar',
             isNullable: false,
           },
           {
@@ -101,6 +108,12 @@ export default class CreateProducerTable1629165842492
             name: 'more_information',
             type: 'varchar',
             isNullable: true,
+          },
+          {
+            name: 'geom',
+            type: 'geography',
+            spatialFeatureType: 'Point',
+            srid: 4326,
           },
           {
             name: 'created_at',

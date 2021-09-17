@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import CreateProducer from '../services/CreateProducer';
+import GetProducers from '../services/GetProducers';
 
 const producerRoutes = Router();
 
@@ -14,6 +15,7 @@ producerRoutes.post('/', async (request, response) => {
     state,
     socialMedia,
     supplyArea,
+    productionSystemEnum,
     productionSystem,
     eggType,
     avgEggProduction,
@@ -21,6 +23,8 @@ producerRoutes.post('/', async (request, response) => {
     permissionToSendInfo,
     email,
     moreInformation,
+    lat,
+    long,
   } = request.body;
 
   const createProducerService = new CreateProducer();
@@ -35,6 +39,7 @@ producerRoutes.post('/', async (request, response) => {
     state,
     socialMedia,
     supplyArea,
+    productionSystemEnum,
     productionSystem,
     eggType,
     avgEggProduction,
@@ -42,13 +47,21 @@ producerRoutes.post('/', async (request, response) => {
     permissionToSendInfo,
     email,
     moreInformation,
+    lat,
+    long,
   });
 
   return response.json(producer);
 });
 
 producerRoutes.get('/', async (request, response) => {
-  return response.json({});
+  const { productionSystem } = request.body;
+
+  const getProducersService = new GetProducers();
+
+  const producers = await getProducersService.execute({ productionSystem });
+
+  return response.json(producers);
 });
 
 export default producerRoutes;
