@@ -64,4 +64,12 @@ producerRoutes.get('/', async (request, response) => {
   return response.json(producers);
 });
 
+producerRoutes.get('/all', async (request, response) => {
+  const getProducersService = new GetProducers();
+
+  const producers = await getProducersService.getAll();
+
+  return response.json(producers);
+});
+
 export default producerRoutes;

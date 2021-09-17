@@ -42,6 +42,25 @@ class GetProducers {
 
     return producers[0].jsonb_build_object;
   }
+
+  public async getAll(): Promise<Producer[]> {
+    const producerRepository = getRepository(Producer);
+
+    const producers = await producerRepository.query(
+      'SELECT id, farm_name, address, district, city, cep, phone_number, state, social_media, supply_area, production_system_enum, production_system, egg_type, avg_egg_production, animals_quantity, permission_to_send_info, email, more_information, ST_X(geom::geometry), ST_Y(geom::geometry) FROM producers',
+      [],
+    );
+
+    const producersFormatted = producers.map((item: any) => {
+      return {
+        ...item,
+        lng: item.st_x,
+        lat: item.st_y,
+      };
+    });
+
+    return producersFormatted;
+  }
 }
 
 export default GetProducers;
