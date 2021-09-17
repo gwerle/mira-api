@@ -55,7 +55,7 @@ producerRoutes.post('/', async (request, response) => {
 });
 
 producerRoutes.get('/', async (request, response) => {
-  const { productionSystem } = request.body;
+  const { productionSystem } = request.query;
 
   const getProducersService = new GetProducers();
 

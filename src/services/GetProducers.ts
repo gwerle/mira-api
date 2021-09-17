@@ -1,9 +1,8 @@
 import { getRepository } from 'typeorm';
-import { ProductionSystem } from '../interfaces';
 import Producer from '../models/Producer';
 
 interface Request {
-  productionSystem: ProductionSystem;
+  productionSystem: any;
 }
 
 class GetProducers {
