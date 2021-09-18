@@ -5,9 +5,9 @@ export = {
   username: 'docker',
   password: 'docker',
   database: 'mira_api',
-  entities: ['./src/models/*.ts'],
-  migrations: ['./src/database/migrations/*.ts'],
+  entities: ['./dist/models/*.js'],
+  migrations: ['./dist/database/migrations/*.js'],
   cli: {
-    migrationsDir: './src/database/migrations',
+    migrationsDir: './dist/database/migrations',
   },
 };
