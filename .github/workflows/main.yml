@@ -46,24 +46,5 @@ jobs:
           script: |
             cd ~/app/mira-api
             yarn
-            
-      - name: Run migrations
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          port: ${{ secrets.SSH_PORT }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            cd ~/app/mira-api
             ./node_modules/.bin/typeorm miration:run
-            
-      - name: Restart Node.JS server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          port: ${{ secrets.SSH_PORT }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
             pm2 restart mira-api
