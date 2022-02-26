@@ -131,9 +131,9 @@ producerRoutes.put('/:id', async (request, response) => {
 producerRoutes.delete('/:id', async (request, response) => {
   const { id } = request.params;
 
-  const deleteTransaction = new DeleteProducer();
+  const deleteProducerService = new DeleteProducer();
 
-  await deleteTransaction.execute(id);
+  await deleteProducerService.execute(id);
 
   return response.status(204).send();
 });
