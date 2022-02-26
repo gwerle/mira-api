@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import CreateProducer from '../services/CreateProducer';
 import GetProducers from '../services/GetProducers';
+import UpdateProducer from '../services/UpdateProducer';
+import DeleteProducer from '../services/DeleteProducer';
 
 const producerRoutes = Router();
 
@@ -70,6 +72,68 @@ producerRoutes.get('/all', async (request, response) => {
   const producers = await getProducersService.getAll();
 
   return response.json(producers);
+});
+
+producerRoutes.put('/:id', async (request, response) => {
+  const { id } = request.params;
+  const {
+    farmName,
+    address,
+    district,
+    city,
+    cep,
+    phoneNumber,
+    state,
+    socialMedia,
+    supplyArea,
+    productionSystemEnum,
+    productionSystem,
+    eggType,
+    avgEggProduction,
+    animalsQuantity,
+    permissionToSendInfo,
+    email,
+    moreInformation,
+    lat,
+    long,
+  } = request.body;
+
+  const updateProducer = new UpdateProducer();
+
+  const newProducer = await updateProducer.execute({
+    id: Number(id),
+    farmName,
+    address,
+    district,
+    city,
+    cep,
+    phoneNumber,
+    state,
+    socialMedia,
+    supplyArea,
+    productionSystemEnum,
+    productionSystem,
+    eggType,
+    avgEggProduction,
+    animalsQuantity,
+    permissionToSendInfo,
+    email,
+    moreInformation,
+    lat,
+    long,
+  });
+
+  return response.json(newProducer);
+});
+
+producerRoutes.delete('/:id', async (request, response) => {
+  const { id } = request.params;
+
+  const deleteTransaction = new DeleteProducer();
+
+  await deleteTransaction.execute(id);
+
+  return response.status(204).send();
 });
 
 export default producerRoutes;
