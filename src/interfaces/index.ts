@@ -6,4 +6,5 @@ export type ProductionSystem =
   | 'ORGANICO'
   | 'NAO_INFORMADO'
   | '2_SISTEMAS_PRODUCAO'
-  | '3_SISTEMAS_PRODUCAO';
+  | '3_SISTEMAS_PRODUCAO'
+  | 'EM_TRANSICAO';
