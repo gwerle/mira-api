@@ -49,6 +49,7 @@ class Producer {
       'LIVRE_GAIOLA',
       'ORGANICO',
       'NAO_INFORMADO',
+      'EM_TRANSICAO',
       '2_SISTEMAS_PRODUCAO',
       '3_SISTEMAS_PRODUCAO',
     ],
